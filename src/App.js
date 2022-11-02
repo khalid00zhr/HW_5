@@ -1,14 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Search from "./Search";
-import Nav from './Nav';
+import axios from "axios";
 import Routers from './Routers';
-import { BrowserRouter as Router, Route,Routes} from 'react-router-dom'
-import Login from "./Login";
+import './App.css';
+import Create from "./Create";
+
+
 function App() {
+  const[state,setstate] = useState([]);
+  useEffect (()=>{
+    axios.get("https://636242897521369cd068e618.mockapi.io/todo").then((res)=>{
+      setstate(res.data);
+      console.log(res.data);
+    })
+  },[])
   return (
     <>
-   <Routers/>
+
+{state.map((e)=>(
+     <div  id="grid"className="container">  
+    <div >
+
+       <p>{e.fname}</p>
+       <p>{e.lname}</p>
+       <p>{e.emil}</p>
+       <p>{e.pass}</p>
+       </div>
+       </div>
+
+     ))}
+
+
+{/* <Create/> */}
+
+{/*    
+   {state.map((e)=>(
+     <div  id="grid"className="container">  
+    <div >
+     <img src={e.image} />
+       <p>{e.name}</p>
+       </div>
+       </div>
+
+     ))} */}
+
+
+
+    {/* <Routers/>  */}
     
     </>
   );
