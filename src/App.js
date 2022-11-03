@@ -13,7 +13,7 @@ function App() {
   
   {/* <Form/> */}
 
-<Create/>
+{/* <Create/> */}
 
 {/*    
    {state.map((e)=>(
@@ -28,7 +28,7 @@ function App() {
 
 
 
-    {/* <Routers/>  */}
+    <Routers/> 
     
     </>
   );

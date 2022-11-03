@@ -13,7 +13,16 @@ function Form() {
         console.log(res.data);
       })
     },[])
+// const onDelete=(id)=>{
+// axios.delete(`https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline/${id}`).then((res)=>{
+//   setstate(state.filter(del =>{
+//     return del.id != id 
+//   }))
 
+
+// })
+
+// }
   return (
     <>
 
@@ -33,7 +42,9 @@ function Form() {
               
               <h4 className="card-title">{e.name}</h4>
               <h6 className="card-subtitle mb-2 text-muted">{e.price} $</h6>
-              
+              <div>
+              {/* <button className="btn btn-danger" onClick={()=>{onDelete}}>Delete</button> */}
+              </div>
           </div>
          </div>
          

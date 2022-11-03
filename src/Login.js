@@ -24,7 +24,7 @@ function Login() {
                         <label className="form-lable h6">password</label>
                         <input type="password" className="form-control"   onChange={e => {seLname(e.target.value)}} />
                         <br/>
-            <button className="btn btn-primary no-" onClick={()=>navigate("/card")}> Login </button>
+            <button className="btn btn-primary " onClick={()=>navigate("/card")}> Login </button>
             </div>
             </div>
             </div>

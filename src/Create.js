@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './App.css';
 import axios from "axios";
+import data from './data';
 
 function Create() {
     const [fname, setFname] = useState();
@@ -9,6 +10,7 @@ function Create() {
     const [emil, setEmil] = useState();
     const [pass, setPass] = useState();
     const [state, setstate] = useState([]);
+    const navigate = useNavigate();
 
     let url = "https://636242897521369cd068e618.mockapi.io/todo";
     const postData = () => {
@@ -18,6 +20,11 @@ function Create() {
             emil,
             pass
         }).then(res => {
+            localStorage.setItem("fname",res.data.fname)
+            localStorage.setItem("lname",res.data.lname)
+            localStorage.setItem("emil",res.data.emil)
+            localStorage.setItem("pass",res.data.pass)
+            localStorage.setItem("id",res.data.id)
 
         }) }
 
@@ -27,6 +34,16 @@ function Create() {
 
         })
     }, [])
+
+    const onDelete=(id)=>{
+        axios.delete(`https://636242897521369cd068e618.mockapi.io/todo/${id}`).then((res)=>{
+          setstate(state.filter(del =>{
+            return del.id != id 
+          }))
+        
+        
+        })}
+        
     return (
 <>
         <form class="row g-3">
@@ -37,15 +54,16 @@ function Create() {
 
                         <div className="card-body">
                             <label className="form-lable h6">First Name</label>
-                            <input type="text" className="form-control " onChange={e => { setFname(e.target.value) }} required />
+                            <input type="text" className="form-control " onChange={e => { setFname(e.target.value) }}  />
                             <label className="form-lable h6">Last Name</label>
-                            <input type="text" className="form-control" onChange={e => { seLname(e.target.value) }}  required/>
+                            <input type="text" className="form-control" onChange={e => { seLname(e.target.value) }}  />
                             <label className="form-lable h6">Email</label>
-                            <input type="text" className="form-control" onChange={e => { setEmil(e.target.value) }}  required/>
+                            <input type="text" className="form-control" onChange={e => { setEmil(e.target.value) }}  />
                             <label className="form-lable h6">password</label>
-                            <input type="text" className="form-control" onChange={e => { setPass(e.target.value) }}  required/>
+                            <input type="text" className="form-control" onChange={e => { setPass(e.target.value) }} />
                             <br />
-                            <button className="btn btn-primary no-"  onClick={postData}> Create </button>
+                            {/* <button className="btn btn-primary"  onClick={()=> navigate('/form')}> Create </button> */}
+                            <button className="btn btn-primary no-"  onClick={postData }> Create </button>
                         </div>
                     </div>
                 </div>
@@ -55,19 +73,22 @@ function Create() {
 
 
                 
-   { state.map((e)=>(
+   { state.map((e ,index)=>(
      
         
     
-      <div className="card p-0 overflow-hidden h-100 shadow"> 
+      <div key={index} > 
   
     
              
-             <h4 className="card-title">{e.fname}</h4>
-             <h6 className="card-subtitle mb-2 text-muted">{e.lname} </h6>
-             <h6 className="card-subtitle mb-2 text-muted">{e.emil} </h6>
-             <h6 className="card-subtitle mb-2 text-muted">{e.pass} </h6>
-             
+             <h4 >{e.fname}</h4>
+             <p >{e.lname} </p>
+             <p >{e.emil} </p>
+             <p >{e.pass} </p>
+             <div>
+             <button className="btn btn-danger" onClick={()=>{onDelete(e.id)}} >Delete</button>
+            <a  href='/update'><button className="btn btn-warning" onClick={()=>localStorage.setItem("id",e.id)}>Update</button></a>
+             </div>
          </div>
         
         
