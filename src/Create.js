@@ -12,9 +12,9 @@ function Create() {
     const [state, setstate] = useState([]);
     const navigate = useNavigate();
 
-    let url = "https://636242897521369cd068e618.mockapi.io/todo";
+    let url = "https://636242897521369cd068e618.mockapi.io/pro";
     const postData = () => {
-        axios.post(url, {
+        axios.post("https://636242897521369cd068e618.mockapi.io/pro", {
             fname,
             lname,
             emil,
@@ -36,7 +36,7 @@ function Create() {
     }, [])
 
     const onDelete=(id)=>{
-        axios.delete(`https://636242897521369cd068e618.mockapi.io/todo/${id}`).then((res)=>{
+        axios.delete(`https://636242897521369cd068e618.mockapi.io/pro/${id}`).then((res)=>{
           setstate(state.filter(del =>{
             return del.id != id 
           }))
@@ -46,21 +46,21 @@ function Create() {
         
     return (
 <>
-        <form class="row g-3">
-            <div class="col-md-50">
+        <form className="row g-3">
+            <div className="col-md-50">
 
                 <div className="col-11 col-md-6 col-lg-3 mx-0 mb-2">
                     <div className="card p-9 overflow-hidden h-400 shadow">
 
                         <div className="card-body">
                             <label className="form-lable h6">First Name</label>
-                            <input type="text" className="form-control " onChange={e => { setFname(e.target.value) }}  />
+                            <input type="text" className="form-control " onChange={data => { setFname(data.target.value) }}  />
                             <label className="form-lable h6">Last Name</label>
-                            <input type="text" className="form-control" onChange={e => { seLname(e.target.value) }}  />
+                            <input type="text" className="form-control" onChange={data => { seLname(data.target.value) }}  />
                             <label className="form-lable h6">Email</label>
-                            <input type="text" className="form-control" onChange={e => { setEmil(e.target.value) }}  />
+                            <input type="text" className="form-control" onChange={data=> { setEmil(data.target.value) }}  />
                             <label className="form-lable h6">password</label>
-                            <input type="text" className="form-control" onChange={e => { setPass(e.target.value) }} />
+                            <input type="text" className="form-control" onChange={data=> { setPass(data.target.value) }} />
                             <br />
                             {/* <button className="btn btn-primary"  onClick={()=> navigate('/form')}> Create </button> */}
                             <button className="btn btn-primary no-"  onClick={postData }> Create </button>
@@ -73,7 +73,7 @@ function Create() {
 
 
                 
-   { state.map((e ,index)=>(
+   { state.map((data,index)=>(
      
         
     
@@ -81,13 +81,13 @@ function Create() {
   
     
              
-             <h4 >{e.fname}</h4>
-             <p >{e.lname} </p>
-             <p >{e.emil} </p>
-             <p >{e.pass} </p>
+             <h4 >{data.fname}</h4>
+             <p >{data.lname} </p>
+             <p >{data.emil} </p>
+             <p >{data.pass} </p>
              <div>
-             <button className="btn btn-danger" onClick={()=>{onDelete(e.id)}} >Delete</button>
-            <a  href='/update'><button className="btn btn-warning" onClick={()=>localStorage.setItem("id",e.id)}>Update</button></a>
+             <button className="btn btn-danger" onClick={()=>{onDelete(data.id)}} >Delete</button>
+            <a  href='/update'><button className="btn btn-warning" onClick={()=>localStorage.setItem("id",data.id)}>Update</button></a>
              </div>
          </div>
         

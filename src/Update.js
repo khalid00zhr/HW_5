@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './App.css';
 import axios from "axios";
+import data from './data';
 
 
 function Update() {
@@ -25,13 +26,13 @@ function Update() {
    
 
    const updatedata =()=>{
-    axios.put(`https://636242897521369cd068e618.mockapi.io/todo/${id}`,{
+    axios.Update(`https://636242897521369cd068e618.mockapi.io/pro/${id}`,{
         fname,
         lname,
         emil,
         pass
     }).then(res=>{
-        console.log(res.id);
+        console.log(res.data.id);
         navigate("/");
     }).catch(err=>{
         console.log(err);
@@ -47,16 +48,17 @@ function Update() {
 
                         <div className="card-body">
                             <label className="form-lable h6">First Name</label>
-                            <input type="text" className="form-control " onChange={e => { setFname(e.target.value) }}  />
+                            <input type="text" className="form-control " onChange={data => { setFname(data.target.value) }}  />
                             <label className="form-lable h6">Last Name</label>
-                            <input type="text" className="form-control" onChange={e => { seLname(e.target.value) }}  />
+                            <input type="text" className="form-control" onChange={data => { seLname(data.target.value) }}  />
                             <label className="form-lable h6">Email</label>
-                            <input type="text" className="form-control" onChange={e => { setEmil(e.target.value) }}  />
+                            <input type="text" className="form-control" onChange={data => { setEmil(data.target.value) }}  />
                             <label className="form-lable h6">password</label>
-                            <input type="text" className="form-control" onChange={e => { setPass(e.target.value) }} />
+                            <input type="text" className="form-control" onChange={data => { setPass(data.target.value) }} />
                             <br />
-                         
-                            <button className="btn btn-dark"  onClick={()=>updatedata}> Update </button>
+                         {console.log(id)}
+                            <button className="btn btn-dark"  onClick={updatedata}> Update </button>
+
                         </div>
                     </div>
                 </div>
